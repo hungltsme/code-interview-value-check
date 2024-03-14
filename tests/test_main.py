@@ -1,4 +1,4 @@
-from main import Operator, find_cheapest_operator
+from main import PhoneOperator, find_the_best_operator
 
 
 class TestMain:
@@ -20,8 +20,8 @@ class TestMain:
         "467": 1.0,
         "48": 1.2,
     }
-    operator_a = Operator("Operator A", operator_a_prices)
-    operator_b = Operator("Operator B", operator_b_prices)
+    operator_a = PhoneOperator("Operator A", operator_a_prices)
+    operator_b = PhoneOperator("Operator B", operator_b_prices)
     operators = [operator_a, operator_b]
 
     def test_find_cheapest_operator_should_return_cheapest_operator_and_price(self):
@@ -29,7 +29,7 @@ class TestMain:
         number = "46123456789"
 
         # When
-        cheapest_operator, price = find_cheapest_operator(number, self.operators)
+        cheapest_operator, price = find_the_best_operator(number, self.operators)
 
         # Expect Operator A is matched
         assert cheapest_operator.name == self.operator_a.name
@@ -39,7 +39,7 @@ class TestMain:
         self.operator_a_prices["46"] = 0.3
 
         # When
-        cheapest_operator, price = find_cheapest_operator(number, self.operators)
+        cheapest_operator, price = find_the_best_operator(number, self.operators)
 
         # Expect Operator B is matched
         assert cheapest_operator.name == self.operator_b.name
@@ -50,7 +50,7 @@ class TestMain:
         wrong_number = "84123456789"
 
         # When
-        cheapest_operator, price = find_cheapest_operator(wrong_number, self.operators)
+        cheapest_operator, price = find_the_best_operator(wrong_number, self.operators)
 
         # Expect Operator is None
         assert cheapest_operator is None
